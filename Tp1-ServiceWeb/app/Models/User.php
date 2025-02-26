@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relation: Un utilisateur peut écrire plusieurs critiques.
+     */
+    public function critics()
+    {
+        return $this->hasMany(Critic::class);
+    }
 }
