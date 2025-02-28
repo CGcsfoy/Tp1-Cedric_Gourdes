@@ -9,7 +9,19 @@ class Film extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'release_year', 'rating', 'length', 'language_id'];
+    protected $fillable = [
+        'title',
+        'description',
+        'release_year',
+        'language_id',
+        'original_language_id',
+        'rental_duration',
+        'rental_rate',
+        'length',
+        'replacement_cost',
+        'rating',
+        'special_features',
+    ];
 
     public function language()
     {
