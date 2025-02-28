@@ -15,7 +15,6 @@ class FilmController extends Controller
         return FilmResource::collection(Film::paginate(20));
     }
 
-    // Route 3
     public function show($id)
     {
         $film = Film::findOrFail($id);
