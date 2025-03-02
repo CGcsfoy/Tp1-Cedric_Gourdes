@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\ErrorCodes; 
+use App\Constants\HttpStatusCodes; 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
@@ -30,12 +30,12 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur base de données',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::DATABASE_ERROR);
+            ], HttpStatusCodes::DATABASE_ERROR);
         } catch (Exception $e) {
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::SERVER_ERROR);
+            ], HttpStatusCodes::SERVER_ERROR);
         }
     }
 
@@ -52,12 +52,12 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur base de données',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::DATABASE_ERROR);
+            ], HttpStatusCodes::DATABASE_ERROR);
         } catch (Exception $e) {
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::SERVER_ERROR);
+            ], HttpStatusCodes::SERVER_ERROR);
         }
     }
 
@@ -81,12 +81,12 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur base de données',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::DATABASE_ERROR);
+            ], HttpStatusCodes::DATABASE_ERROR);
         } catch (Exception $e) {
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], ErrorCodes::SERVER_ERROR);
+            ], HttpStatusCodes::SERVER_ERROR);
         }
     }
 }

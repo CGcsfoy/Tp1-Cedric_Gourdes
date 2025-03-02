@@ -13,6 +13,8 @@ Route::get('/films/{id}/critics', 'App\Http\Controllers\CriticController@show');
 Route::post('/users', 'App\Http\Controllers\UserController@store');
 // Route 5
 Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
+// Route 6
+Route::delete('/critics/{id}', 'App\Http\Controllers\CriticController@destroy');
 
 
 
