@@ -11,6 +11,8 @@ Route::get('/films/{id}/actors', 'App\Http\Controllers\ActorController@index');
 Route::get('/films/{id}/critics', 'App\Http\Controllers\CriticController@show');
 // Route 4
 Route::post('/users', 'App\Http\Controllers\UserController@store');
+// Route 5
+Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
 
 
 

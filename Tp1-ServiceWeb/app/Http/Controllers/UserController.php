@@ -2,72 +2,91 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\ErrorCodes; 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use App\Models\User;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\DB;
+use Exception;
 
 class UserController extends Controller
 {
-    // Route 4
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         try {
-            $validated = $request->validate([
-                'login' => 'required|string|max:255',
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:8',
-            ]);
-    
             $user = User::create([
-                'login' => $validated['login'],
-                'first_name' => $validated['first_name'],
-                'last_name' => $validated['last_name'],
-                'email' => $validated['email'],
-                'password' => bcrypt($validated['password']),
+                'login' => $request->login,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
             ]);
-    
-            return new UserResource($user);
-        } catch (\Exception $e) {
+
+            return (new UserResource($user))->response()->setStatusCode(201);
+
+        } catch (QueryException $e) {
+            return response()->json([
+                'error' => 'Erreur base de données',
+                'message' => $e->getMessage(),
+            ], ErrorCodes::DATABASE_ERROR);
+        } catch (Exception $e) {
             return response()->json([
                 'error' => 'Erreur serveur',
-                'message' => $e->getMessage()
-            ], 500);
+                'message' => $e->getMessage(),
+            ], ErrorCodes::SERVER_ERROR);
         }
     }
-    
 
-    // Route 5
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        $user = User::findOrFail($id);
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
-        ]);
+        try {
+            $user = User::findOrFail($id);
 
-        if (!empty($validated['password'])) {
-            $validated['password'] = bcrypt($validated['password']);
+            $user->update($request->validated());
+
+            return new UserResource($user);
+
+        } catch (QueryException $e) {
+            return response()->json([
+                'error' => 'Erreur base de données',
+                'message' => $e->getMessage(),
+            ], ErrorCodes::DATABASE_ERROR);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'Erreur serveur',
+                'message' => $e->getMessage(),
+            ], ErrorCodes::SERVER_ERROR);
         }
-
-        $user->update($validated);
-        return new UserResource($user);
     }
 
-    // Route 8
     public function preferredLanguage($id)
     {
-        $user = User::findOrFail($id);
-        $preferredLanguage = $user->critics()
-            ->select('films.language_id', DB::raw('COUNT(*) as count'))
-            ->join('films', 'critics.film_id', '=', 'films.id')
-            ->groupBy('films.language_id')
-            ->orderByDesc('count')
-            ->first();
+        try {
+            $user = User::findOrFail($id);
 
-        return response()->json(['preferred_language_id' => $preferredLanguage->language_id ?? null]);
+            $preferredLanguage = $user->critics()
+                ->select('films.language_id', \DB::raw('COUNT(*) as count'))
+                ->join('films', 'critics.film_id', '=', 'films.id')
+                ->groupBy('films.language_id')
+                ->orderByDesc('count')
+                ->first();
+
+            return response()->json([
+                'preferred_language_id' => optional($preferredLanguage)->language_id
+            ]);
+
+        } catch (QueryException $e) {
+            return response()->json([
+                'error' => 'Erreur base de données',
+                'message' => $e->getMessage(),
+            ], ErrorCodes::DATABASE_ERROR);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'Erreur serveur',
+                'message' => $e->getMessage(),
+            ], ErrorCodes::SERVER_ERROR);
+        }
     }
 }
