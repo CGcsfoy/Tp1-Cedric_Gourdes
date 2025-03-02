@@ -9,7 +9,8 @@ Route::get('/films', 'App\Http\Controllers\FilmController@index');
 Route::get('/films/{id}/actors', 'App\Http\Controllers\ActorController@index');
 // Route 3
 Route::get('/films/{id}/critics', 'App\Http\Controllers\CriticController@show');
-
+// Route 4
+Route::post('/users', 'App\Http\Controllers\UserController@store');
 
 
 
