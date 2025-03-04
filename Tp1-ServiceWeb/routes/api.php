@@ -17,8 +17,8 @@ Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
 Route::delete('/critics/{id}', 'App\Http\Controllers\CriticController@destroy');
 // Route 7
 Route::get('/films/{id}/average-score', 'App\Http\Controllers\FilmController@averageScore');
-
-
+// Route 8 -- Revoir, retourne toujours 1
+Route::get('/users/{id}/preferred-language', 'App\Http\Controllers\UserController@preferredLanguage');
 
 
 
