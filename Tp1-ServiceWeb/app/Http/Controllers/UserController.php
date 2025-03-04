@@ -13,6 +13,7 @@ use Exception;
 
 class UserController extends Controller
 {
+    // Route 4
     public function store(StoreUserRequest $request)
     {
         try {
@@ -39,6 +40,7 @@ class UserController extends Controller
         }
     }
 
+    // Route 5
     public function update(UpdateUserRequest $request, $id)
     {
         try {
@@ -61,6 +63,7 @@ class UserController extends Controller
         }
     }
 
+    // Route 8
     public function preferredLanguage($id)
     {
         try {

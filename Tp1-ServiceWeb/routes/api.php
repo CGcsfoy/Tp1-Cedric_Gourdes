@@ -15,6 +15,10 @@ Route::post('/users', 'App\Http\Controllers\UserController@store');
 Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
 // Route 6
 Route::delete('/critics/{id}', 'App\Http\Controllers\CriticController@destroy');
+// Route 7
+Route::get('/films/{id}/average-score', 'App\Http\Controllers\FilmController@averageScore');
+
+
 
 
 
