@@ -10,6 +10,7 @@ use App\Constants\HttpStatusCodes;
 
 class FilmController extends Controller
 {
+    
     // Route 1
     public function index()
     {

@@ -25,3 +25,4 @@ Route::get('/films/search', 'App\Http\Controllers\FilmController@search');
 
 // Routes inutiles dans le TP1
 Route::get('/films/{id}', 'App\Http\Controllers\FilmController@show');
+
