@@ -1,0 +1,347 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API TP1",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/films/{id}/actors": {
+            "get": {
+                "tags": [
+                    "Actors"
+                ],
+                "summary": "Obtenir la liste des acteurs d'un film",
+                "description": "Retourne une liste des acteurs associés à l'ID d'un film donné",
+                "operationId": "d62b9260915205f0765620cea8792c4d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des acteurs récupérée"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    },
+                    "500": {
+                        "description": "Erreur de base de données"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}/critics": {
+            "get": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Obtenir les critiques d'un film",
+                "description": "Retourne une liste de critiques associées à un film donné",
+                "operationId": "7628d1cb411607ea9479f275ab647dfe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des critiques récupérée"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    },
+                    "503": {
+                        "description": "Erreur base de données"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/critics/{id}": {
+            "delete": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Supprimer une critique",
+                "description": "Supprime une critique spécifique par son ID",
+                "operationId": "4c7bbd907e57760bbbfc560c1ba8e1ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Critique supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Critique non trouvée"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    },
+                    "503": {
+                        "description": "Erreur base de données"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/films": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Lister les films",
+                "description": "Retourne une liste paginée des films",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "Liste des films récupérée"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Obtenir un film par ID",
+                "description": "Retourne les détails d'un film",
+                "operationId": "bb11826b5087b0708ec01458c9053803",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Film trouvé"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}/average-score": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Obtenir la note moyenne d'un film",
+                "description": "Retourne la note moyenne des critiques",
+                "operationId": "fcd693de18daad26767293c2f5a2927e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note moyenne calculée"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    }
+                }
+            }
+        },
+        "/api/films/search": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Rechercher des films",
+                "description": "Recherche des films par critères",
+                "operationId": "ddbc3843cfe184eb1429a6ad3d501fbb",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "minLength",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "maxLength",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Résultats de la recherche"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un utilisateur",
+                "description": "Crée un nouvel utilisateur avec les informations fournies",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mettre à jour un utilisateur",
+                "description": "Met à jour les informations d'un utilisateur existant",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur mis à jour"
+                    },
+                    "404": {
+                        "description": "Utilisateur introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/preferred-language": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtenir la langue préférée d'un utilisateur",
+                "description": "Retourne l'ID de la langue la plus souvent critiquée par l'utilisateur",
+                "operationId": "b0616f0bd4be35487956ca77ee06a680",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Langue préférée retournée"
+                    },
+                    "404": {
+                        "description": "Utilisateur introuvable"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Actors",
+            "description": "Actors"
+        },
+        {
+            "name": "Critics",
+            "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
