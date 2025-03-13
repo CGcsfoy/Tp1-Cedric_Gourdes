@@ -44,8 +44,14 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         try {
+            if (!is_numeric($id) || intval($id) <= 0) {
+                return response()->json([
+                    'error' => 'ID invalide',
+                    'message' => 'L\'ID de l\'utilisateur doit être un entier positif.'
+                ], HttpStatusCodes::UNPROCESSABLE_ENTITY);
+            }
+            
             $user = User::findOrFail($id);
-
             $user->update($request->validated());
 
             return new UserResource($user);

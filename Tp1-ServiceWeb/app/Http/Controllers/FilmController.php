@@ -32,6 +32,13 @@ class FilmController extends Controller
     public function show($id)
     {
         try {
+            if (!is_numeric($id) || intval($id) <= 0) {
+                return response()->json([
+                    'error' => 'ID invalide',
+                    'message' => 'L\'ID du film doit être un entier positif.'
+                ], HttpStatusCodes::UNPROCESSABLE_ENTITY);
+            }
+            
             $film = Film::findOrFail($id);
             return new FilmResource($film);
         } catch (QueryException $e) {

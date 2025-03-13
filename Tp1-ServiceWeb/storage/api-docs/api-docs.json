@@ -43,6 +43,22 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "description": "Erreur de base de données",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "ErreurBaseDeDonnees": {
+                                        "summary": "Réponse en cas d'erreur de base de données",
+                                        "value": {
+                                            "error": "Erreur de base de données",
+                                            "message": "SQLSTATE[HY000]: Erreur générale"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -17,6 +17,13 @@ class CriticController extends Controller
     public function show($id)
     {
         try {
+            if (!is_numeric($id) || intval($id) <= 0) {
+                return response()->json([
+                    'error' => 'ID invalide',
+                    'message' => 'L\'ID du film doit être un entier positif.'
+                ], HttpStatusCodes::UNPROCESSABLE_ENTITY);
+            }
+
             $film = Film::findOrFail($id);
             return CriticResource::collection($film->critics)
                 ->response()->setStatusCode(HttpStatusCodes::OK);
@@ -45,6 +52,13 @@ class CriticController extends Controller
     public function destroy($id)
     {
         try {
+            if (!is_numeric($id) || intval($id) <= 0) {
+                return response()->json([
+                    'error' => 'ID invalide',
+                    'message' => 'L\'ID de la critique doit être un entier positif.'
+                ], HttpStatusCodes::UNPROCESSABLE_ENTITY);
+            }
+            
             $critic = Critic::findOrFail($id);
             $critic->delete();
             return response()->json([

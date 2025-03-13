@@ -39,22 +39,59 @@ class ActorController extends Controller
      *                 }
      *             )
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="ID invalide",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Examples(
+     *                 example="IDInvalide",
+     *                 summary="Réponse lorsque l'ID est incorrect",
+     *                 value={
+     *                     "error": "ID invalide",
+     *                     "message": "L'ID du film doit être un entier positif."
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erreur de base de données",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Examples(
+     *                 example="ErreurBaseDeDonnees",
+     *                 summary="Réponse en cas d'erreur de base de données",
+     *                 value={
+     *                     "error": "Erreur de base de données",
+     *                     "message": "SQLSTATE[HY000]: Erreur générale"
+     *                 }
+     *             )
+     *         )
      *     )
      * )
      */
     public function index($id)
     {
         try {
+            if (!is_numeric($id) || intval($id) <= 0) {
+                return response()->json([
+                    'error' => 'ID invalide',
+                    'message' => 'L\'ID du film doit être un entier positif.'
+                ], HttpStatusCodes::UNPROCESSABLE_ENTITY);
+            }
+
             $film = Film::findOrFail($id);
             return ActorResource::collection($film->actors);
         } catch (QueryException $e) {
             return response()->json([
-                'error' => 'Erreur base de données',
+                'error' => 'Erreur de base de données',
                 'message' => $e->getMessage(),
             ], HttpStatusCodes::INTERNAL_SERVER_ERROR);
         } catch (Exception $e) {
             return response()->json([
-                'error' => 'Film non trouvé',
+                'error' => 'Film introuvable',
                 'message' => $e->getMessage(),
             ], HttpStatusCodes::NOT_FOUND);
         }
