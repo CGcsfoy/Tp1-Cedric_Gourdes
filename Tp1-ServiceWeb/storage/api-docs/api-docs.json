@@ -17,7 +17,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du film",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -26,55 +25,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Liste des acteurs récupérée avec succès"
+                        "description": "Liste des acteurs récupérée"
                     },
                     "404": {
-                        "description": "Film introuvable",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "FilmIntrouvable": {
-                                        "summary": "Réponse lorsque le film n'est pas trouvé",
-                                        "value": {
-                                            "error": "Film introuvable",
-                                            "message": "Aucun résultat trouvé pour le modèle [Film] avec cet ID"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Film introuvable"
                     },
                     "422": {
-                        "description": "ID invalide",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "IDInvalide": {
-                                        "summary": "Réponse lorsque l'ID est incorrect",
-                                        "value": {
-                                            "error": "ID invalide",
-                                            "message": "L'ID du film doit être un entier positif."
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "ID invalide"
                     },
                     "500": {
-                        "description": "Erreur de base de données",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "ErreurBaseDeDonnees": {
-                                        "summary": "Réponse en cas d'erreur de base de données",
-                                        "value": {
-                                            "error": "Erreur de base de données",
-                                            "message": "SQLSTATE[HY000]: Erreur générale"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Erreur de base de données"
                     }
                 }
             }
@@ -91,7 +51,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du film",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -100,71 +59,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Liste des critiques récupérée avec succès"
+                        "description": "Liste des critiques récupérée"
                     },
                     "404": {
-                        "description": "Film introuvable",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "FilmIntrouvable": {
-                                        "summary": "Film non trouvé",
-                                        "value": {
-                                            "error": "Film non trouvé",
-                                            "message": "Aucun film trouvé avec cet ID"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Film introuvable"
                     },
                     "422": {
-                        "description": "ID invalide",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "IDInvalide": {
-                                        "summary": "ID fourni non valide",
-                                        "value": {
-                                            "error": "ID invalide",
-                                            "message": "L'ID du film doit être un entier positif."
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "ID invalide"
                     },
                     "503": {
-                        "description": "Erreur base de données",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "ErreurBaseDeDonnees": {
-                                        "summary": "Erreur de base de données",
-                                        "value": {
-                                            "error": "Erreur base de données",
-                                            "message": "Erreur générale"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Erreur base de données"
                     },
                     "500": {
-                        "description": "Erreur serveur",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "ErreurServeur": {
-                                        "summary": "Erreur interne du serveur",
-                                        "value": {
-                                            "error": "Erreur serveur",
-                                            "message": "Une erreur inconnue s'est produite."
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Erreur serveur"
                     }
                 }
             }
@@ -181,7 +88,6 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID de la critique",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -193,68 +99,16 @@
                         "description": "Critique supprimée avec succès"
                     },
                     "404": {
-                        "description": "Critique non trouvée",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "CritiqueIntrouvable": {
-                                        "summary": "Critique non trouvée",
-                                        "value": {
-                                            "error": "Critique non trouvée",
-                                            "message": "Aucune critique trouvée avec cet ID"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Critique non trouvée"
                     },
                     "422": {
-                        "description": "ID invalide",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "IDInvalide": {
-                                        "summary": "ID fourni non valide",
-                                        "value": {
-                                            "error": "ID invalide",
-                                            "message": "L'ID de la critique doit être un entier positif."
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "ID invalide"
                     },
                     "503": {
-                        "description": "Erreur base de données",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "ErreurBaseDeDonnees": {
-                                        "summary": "Erreur de base de données",
-                                        "value": {
-                                            "error": "Erreur base de données",
-                                            "message": "SQLSTATE[HY000]: Erreur générale"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Erreur base de données"
                     },
                     "500": {
-                        "description": "Erreur serveur",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "ErreurServeur": {
-                                        "summary": "Erreur interne du serveur",
-                                        "value": {
-                                            "error": "Erreur serveur",
-                                            "message": "Une erreur inconnue s'est produite."
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Erreur serveur"
                     }
                 }
             }
