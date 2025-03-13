@@ -241,6 +241,89 @@
                     }
                 }
             }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un utilisateur",
+                "description": "Crée un nouvel utilisateur avec les informations fournies",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mettre à jour un utilisateur",
+                "description": "Met à jour les informations d'un utilisateur existant",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur mis à jour"
+                    },
+                    "404": {
+                        "description": "Utilisateur introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/preferred-language": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtenir la langue préférée d'un utilisateur",
+                "description": "Retourne l'ID de la langue la plus souvent critiquée par l'utilisateur",
+                "operationId": "b0616f0bd4be35487956ca77ee06a680",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Langue préférée retournée"
+                    },
+                    "404": {
+                        "description": "Utilisateur introuvable"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -255,6 +338,10 @@
         {
             "name": "Films",
             "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         }
     ]
 }

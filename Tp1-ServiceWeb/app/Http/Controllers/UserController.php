@@ -13,7 +13,16 @@ use Exception;
 
 class UserController extends Controller
 {
-    // Route 4
+    /**
+     * @OA\Post(
+     *     path="/api/users",
+     *     tags={"Users"},
+     *     summary="Créer un utilisateur",
+     *     description="Crée un nouvel utilisateur avec les informations fournies",
+     *     @OA\Response(response=201, description="Utilisateur créé"),
+     *     @OA\Response(response=500, description="Erreur serveur")
+     * )
+     */
     public function store(StoreUserRequest $request)
     {
         try {
@@ -40,7 +49,19 @@ class UserController extends Controller
         }
     }
 
-    // Route 5
+    /**
+     * @OA\Put(
+     *     path="/api/users/{id}",
+     *     tags={"Users"},
+     *     summary="Mettre à jour un utilisateur",
+     *     description="Met à jour les informations d'un utilisateur existant",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Utilisateur mis à jour"),
+     *     @OA\Response(response=404, description="Utilisateur introuvable"),
+     *     @OA\Response(response=422, description="ID invalide"),
+     *     @OA\Response(response=500, description="Erreur serveur")
+     * )
+     */
     public function update(UpdateUserRequest $request, $id)
     {
         try {
@@ -69,7 +90,18 @@ class UserController extends Controller
         }
     }
 
-    // Route 8
+    /**
+     * @OA\Get(
+     *     path="/api/users/{id}/preferred-language",
+     *     tags={"Users"},
+     *     summary="Obtenir la langue préférée d'un utilisateur",
+     *     description="Retourne l'ID de la langue la plus souvent critiquée par l'utilisateur",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Langue préférée retournée"),
+     *     @OA\Response(response=404, description="Utilisateur introuvable"),
+     *     @OA\Response(response=500, description="Erreur serveur")
+     * )
+     */
     public function preferredLanguage($id)
     {
         try {
