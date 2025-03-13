@@ -20,7 +20,7 @@ class FilmController extends Controller
             return response()->json([
                 'error' => 'Erreur base de données',
                 'message' => $e->getMessage(),
-            ], HttpStatusCodes::INTERNAL_SERVER_ERROR);
+            ], HttpStatusCodes::SERVER_ERROR);
         } catch (Exception $e) {
             return response()->json([
                 'error' => 'Erreur serveur',

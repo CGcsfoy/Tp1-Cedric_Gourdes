@@ -36,7 +36,7 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], HttpStatusCodes::SERVER_ERROR);
+            ], HttpStatusCodes::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -59,7 +59,7 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], HttpStatusCodes::SERVER_ERROR);
+            ], HttpStatusCodes::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Erreur serveur',
                 'message' => $e->getMessage(),
-            ], HttpStatusCodes::SERVER_ERROR);
+            ], HttpStatusCodes::INTERNAL_SERVER_ERROR);
         }
     }
 }

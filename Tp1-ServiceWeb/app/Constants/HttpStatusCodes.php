@@ -20,7 +20,7 @@ class HttpStatusCodes
     public const CONFLICT = 409;
     public const UNPROCESSABLE_ENTITY = 422;
 
-    public const SERVER_ERROR = 500;
+    public const INTERNAL_SERVER_ERROR = 500;
     public const NOT_IMPLEMENTED = 501;
     public const BAD_GATEWAY = 502;
     public const SERVICE_UNAVAILABLE = 503;

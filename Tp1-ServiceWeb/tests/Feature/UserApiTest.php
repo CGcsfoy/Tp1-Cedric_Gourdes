@@ -80,7 +80,7 @@ class UserApiTest extends TestCase
         ]);
     
         // Assert
-        $response->assertStatus(HttpStatusCodes::SERVER_ERROR);
+        $response->assertStatus(HttpStatusCodes::INTERNAL_SERVER_ERROR);
         $response->assertJson(['error' => 'Erreur serveur']);
     }
     
@@ -106,7 +106,7 @@ class UserApiTest extends TestCase
         $response = $this->getJson('/api/users/999999/preferred-language');
 
         // Assert
-        $response->assertStatus(HttpStatusCodes::SERVER_ERROR);
+        $response->assertStatus(HttpStatusCodes::INTERNAL_SERVER_ERROR);
         $response->assertJson(['error' => 'Erreur serveur']);
     }
 }
