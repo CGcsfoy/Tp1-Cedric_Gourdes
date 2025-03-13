@@ -143,7 +143,7 @@
                                         "summary": "Erreur de base de données",
                                         "value": {
                                             "error": "Erreur base de données",
-                                            "message": "SQLSTATE[HY000]: Erreur générale"
+                                            "message": "Erreur générale"
                                         }
                                     }
                                 }
@@ -258,6 +258,135 @@
                     }
                 }
             }
+        },
+        "/api/films": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Lister les films",
+                "description": "Retourne une liste paginée des films",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "Liste des films récupérée"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Obtenir un film par ID",
+                "description": "Retourne les détails d'un film",
+                "operationId": "bb11826b5087b0708ec01458c9053803",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Film trouvé"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}/average-score": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Obtenir la note moyenne d'un film",
+                "description": "Retourne la note moyenne des critiques",
+                "operationId": "fcd693de18daad26767293c2f5a2927e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note moyenne calculée"
+                    },
+                    "404": {
+                        "description": "Film introuvable"
+                    },
+                    "422": {
+                        "description": "ID invalide"
+                    }
+                }
+            }
+        },
+        "/api/films/search": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Rechercher des films",
+                "description": "Recherche des films par critères",
+                "operationId": "ddbc3843cfe184eb1429a6ad3d501fbb",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "minLength",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "maxLength",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Résultats de la recherche"
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -268,6 +397,10 @@
         {
             "name": "Critics",
             "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
         }
     ]
 }
