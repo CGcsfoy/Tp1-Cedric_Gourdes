@@ -44,6 +44,22 @@
                             }
                         }
                     },
+                    "422": {
+                        "description": "ID invalide",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "IDInvalide": {
+                                        "summary": "Réponse lorsque l'ID est incorrect",
+                                        "value": {
+                                            "error": "ID invalide",
+                                            "message": "L'ID du film doit être un entier positif."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "500": {
                         "description": "Erreur de base de données",
                         "content": {
@@ -62,12 +78,196 @@
                     }
                 }
             }
+        },
+        "/api/films/{id}/critics": {
+            "get": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Obtenir les critiques d'un film",
+                "description": "Retourne une liste de critiques associées à un film donné",
+                "operationId": "7628d1cb411607ea9479f275ab647dfe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du film",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des critiques récupérée avec succès"
+                    },
+                    "404": {
+                        "description": "Film introuvable",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "FilmIntrouvable": {
+                                        "summary": "Film non trouvé",
+                                        "value": {
+                                            "error": "Film non trouvé",
+                                            "message": "Aucun film trouvé avec cet ID"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "ID invalide",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "IDInvalide": {
+                                        "summary": "ID fourni non valide",
+                                        "value": {
+                                            "error": "ID invalide",
+                                            "message": "L'ID du film doit être un entier positif."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Erreur base de données",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "ErreurBaseDeDonnees": {
+                                        "summary": "Erreur de base de données",
+                                        "value": {
+                                            "error": "Erreur base de données",
+                                            "message": "SQLSTATE[HY000]: Erreur générale"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erreur serveur",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "ErreurServeur": {
+                                        "summary": "Erreur interne du serveur",
+                                        "value": {
+                                            "error": "Erreur serveur",
+                                            "message": "Une erreur inconnue s'est produite."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/critics/{id}": {
+            "delete": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Supprimer une critique",
+                "description": "Supprime une critique spécifique par son ID",
+                "operationId": "4c7bbd907e57760bbbfc560c1ba8e1ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la critique",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Critique supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Critique non trouvée",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CritiqueIntrouvable": {
+                                        "summary": "Critique non trouvée",
+                                        "value": {
+                                            "error": "Critique non trouvée",
+                                            "message": "Aucune critique trouvée avec cet ID"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "ID invalide",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "IDInvalide": {
+                                        "summary": "ID fourni non valide",
+                                        "value": {
+                                            "error": "ID invalide",
+                                            "message": "L'ID de la critique doit être un entier positif."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Erreur base de données",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "ErreurBaseDeDonnees": {
+                                        "summary": "Erreur de base de données",
+                                        "value": {
+                                            "error": "Erreur base de données",
+                                            "message": "SQLSTATE[HY000]: Erreur générale"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erreur serveur",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "ErreurServeur": {
+                                        "summary": "Erreur interne du serveur",
+                                        "value": {
+                                            "error": "Erreur serveur",
+                                            "message": "Une erreur inconnue s'est produite."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Actors",
             "description": "Actors"
+        },
+        {
+            "name": "Critics",
+            "description": "Critics"
         }
     ]
 }
